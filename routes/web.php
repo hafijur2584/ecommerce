@@ -17,3 +17,6 @@ Route::get('/', function () {
 Route::get('/cart', function () {
     return view('user.cart');
 });
+Route::get('/singleProduct', function () {
+    return view('user.singleProduct');
+});
