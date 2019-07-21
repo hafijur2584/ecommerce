@@ -106,7 +106,7 @@
                                 <figure class="card card-product">
                                     <div class="img-wrap">
                                         <img src="{{ asset('user/images/items/4.jpg') }}">
-                                        <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
+                                        <a class="btn-overlay" href="{{ route('shop.show',$product->name) }}"><i class="fa fa-search-plus"></i> Quick view</a>
                                     </div>
                                     <figcaption class="info-wrap">
                                         <a href="#" class="title">{{ $product->name }}</a>

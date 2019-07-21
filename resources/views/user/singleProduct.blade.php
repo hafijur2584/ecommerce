@@ -36,29 +36,27 @@
                             <aside class="col-sm-6">
                                 <article class="card-body">
                                     <!-- short-info-wrap -->
-                                    <h3 class="title mb-3">Original Version of Some product name</h3>
+                                    <h3 class="title mb-3">{{ $product->name }}</h3>
 
                                     <div class="mb-3">
                                         <var class="price h3 text-warning">
-                                            <span class="currency">US $</span><span class="num">1299</span>
+                                            <span class="currency">US $</span><span class="num">{{ $product->price }}</span>
                                         </var>
-                                        <span>/per kg</span>
+                                        <span>/per unit</span>
                                     </div> <!-- price-detail-wrap .// -->
                                     <dl>
                                         <dt>Description</dt>
-                                        <dd><p>Here goes description consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                quis nostrud exercitation ullamco </p></dd>
+                                        <dd><p>{{ $product->description }} </p></dd>
                                     </dl>
                                     <dl class="row">
                                         <dt class="col-sm-3">Model#</dt>
-                                        <dd class="col-sm-9">12345611</dd>
+                                        <dd class="col-sm-9"> {{ $product->model }} </dd>
 
                                         <dt class="col-sm-3">Color</dt>
-                                        <dd class="col-sm-9">Black and white </dd>
+                                        <dd class="col-sm-9"> {{ $product->color }} </dd>
 
                                         <dt class="col-sm-3">Brand</dt>
-                                        <dd class="col-sm-9">Philips </dd>
+                                        <dd class="col-sm-9"> {{ $product->brand }} </dd>
                                     </dl>
                                     <div class="rating-wrap">
 
@@ -75,7 +73,6 @@
                                             </li>
                                         </ul>
                                         <div class="label-rating">132 reviews</div>
-                                        <div class="label-rating">154 orders </div>
                                     </div> <!-- rating-wrap.// -->
                                     <hr>
                                     <div class="row">
@@ -93,21 +90,12 @@
                                         </div> <!-- col.// -->
                                         <div class="col-sm-7">
                                             <dl class="dlist-inline">
-                                                <dt>Size: </dt>
-                                                <dd>
-                                                    <label class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="option2" type="radio">
-                                                        <span class="form-check-label">SM</span>
-                                                    </label>
-                                                    <label class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="option2" type="radio">
-                                                        <span class="form-check-label">MD</span>
-                                                    </label>
-                                                    <label class="form-check form-check-inline">
-                                                        <input class="form-check-input" name="inlineRadioOptions" id="inlineRadio2" value="option2" type="radio">
-                                                        <span class="form-check-label">XXL</span>
-                                                    </label>
-                                                </dd>
+                                                @if($product->stock>0)
+                                                    <dt>Stock: </dt>
+                                                    <dd class="col-sm-9"> {{ $product->stock }} </dd>
+                                                @else
+                                                    <dt>Out of Stock </dt>
+                                                @endif
                                             </dl>  <!-- item-property .// -->
                                         </div> <!-- col.// -->
                                     </div> <!-- row.// -->
@@ -124,32 +112,7 @@
                     <article class="card mt-3">
                         <div class="card-body">
                             <h4>Detail overview</h4>
-                            <p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia ididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi deserunt mollit anim id est laborum.</p>
-                            <p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteurididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                            <p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            {!! $product->details !!}
                         </div> <!-- card-body.// -->
                     </article> <!-- card.// -->
 
@@ -163,39 +126,19 @@
                         </div>
 
                         <div class="card-body row">
-                            <div class="col-md-12 col-sm-3">
-                                <figure class="item border-bottom mb-3">
-                                    <a href="#" class="img-wrap"> <img src="{{ asset('user/images/items/2.jpg') }}" class="img-md"></a>
-                                    <figcaption class="info-wrap">
-                                        <a href="#" class="title">The name of product</a>
-                                        <div class="price-wrap mb-3">
-                                            <span class="price-new">$280</span> <del class="price-old">$280</del>
-                                        </div> <!-- price-wrap.// -->
-                                    </figcaption>
-                                </figure> <!-- card-product // -->
-                            </div> <!-- col.// -->
-                            <div class="col-md-12 col-sm-3">
-                                <figure class="item border-bottom mb-3">
-                                    <a class="img-wrap"> <img src="{{ asset('user/images/items/3.jpg') }}" class="img-md"></a>
-                                    <figcaption class="info-wrap">
-                                        <a href="#" href="#" class="title">The name of product</a>
-                                        <div class="price-wrap mb-3">
-                                            <span class="price-new">$280</span>
-                                        </div> <!-- price-wrap.// -->
-                                    </figcaption>
-                                </figure> <!-- card-product // -->
-                            </div> <!-- col.// -->
-                            <div class="col-md-12 col-sm-3">
-                                <figure class="item border-bottom mb-3">
-                                    <a href="#" class="img-wrap"> <img src="{{ asset('user/images/items/4.jpg') }}" class="img-md"></a>
-                                    <figcaption class="info-wrap">
-                                        <a href="#" class="title">The name of product</a>
-                                        <div class="price-wrap mb-3">
-                                            <span class="price-new">$280</span>
-                                        </div> <!-- price-wrap.// -->
-                                    </figcaption>
-                                </figure> <!-- card-product // -->
-                            </div> <!-- col.// -->
+                            @foreach($products as $product)
+                                <div class="col-md-12 col-sm-3">
+                                    <figure class="item border-bottom mb-3">
+                                        <a href="#" class="img-wrap"> <img src="{{ asset('user/images/items/4.jpg') }}" class="img-md"></a>
+                                        <figcaption class="info-wrap">
+                                            <a href="#" class="title">{{ $product->name }}</a>
+                                            <div class="price-wrap mb-3">
+                                                <span class="price-new">${{ $product->price }}</span>
+                                            </div> <!-- price-wrap.// -->
+                                        </figcaption>
+                                    </figure> <!-- card-product // -->
+                                </div> <!-- col.// -->
+                            @endforeach
                         </div> <!-- card-body.// -->
                     </div> <!-- card.// -->
                 </aside> <!-- col // -->

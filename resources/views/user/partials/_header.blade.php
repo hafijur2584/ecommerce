@@ -2,7 +2,7 @@
 <header class="section-header">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="/"><img class="logo" src="user/images/logos/logo122.png" alt="e-commerce html" title="e-commerce">   </a>
+            <a class="navbar-brand" href="/"><img class="logo" src="{{ asset('user/images/logos/logo122.png') }}" alt="e-commerce html" title="e-commerce">   </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
