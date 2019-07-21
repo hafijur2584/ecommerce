@@ -22,118 +22,51 @@
                                 <th scope="col">Product</th>
                                 <th scope="col" width="120">Quantity</th>
                                 <th scope="col" width="120">Price</th>
+                                <th scope="col" width="120">Total</th>
                                 <th scope="col" class="text-right" width="200">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <figure class="media">
-                                        <div class="img-wrap"><img src="{{ asset('user/images/items/1.jpg') }}" class="img-thumbnail img-sm"></div>
-                                        <figcaption class="media-body">
-                                            <h6 class="title text-truncate">Product name goes here </h6>
-                                            <dl class="dlist-inline small">
-                                                <dt>Size: </dt>
-                                                <dd>XXL</dd>
-                                            </dl>
-                                            <dl class="dlist-inline small">
-                                                <dt>Color: </dt>
-                                                <dd>Orange color</dd>
-                                            </dl>
-                                        </figcaption>
-                                    </figure>
-                                </td>
-                                <td>
-                                    <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <div class="price-wrap">
-                                        <var class="price">USD 145</var>
-                                        <small class="text-muted">(USD5 each)</small>
-                                    </div> <!-- price-wrap .// -->
-                                </td>
-                                <td class="text-right">
-                                    <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                    <a href="" class="btn btn-outline-danger"> × Remove</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <figure class="media">
-                                        <div class="img-wrap"><img src="{{ asset('user/images/items/2.jpg') }}" class="img-thumbnail img-sm"></div>
-                                        <figcaption class="media-body">
-                                            <h6 class="title text-truncate">Product name goes here </h6>
-                                            <dl class="dlist-inline small">
-                                                <dt>Size: </dt>
-                                                <dd>XXL</dd>
-                                            </dl>
-                                            <dl class="dlist-inline small">
-                                                <dt>Color: </dt>
-                                                <dd>Orange color</dd>
-                                            </dl>
-                                        </figcaption>
-                                    </figure>
-                                </td>
-                                <td>
-                                    <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <div class="price-wrap">
-                                        <var class="price">USD 35</var>
-                                        <small class="text-muted">(USD10 each)</small>
-                                    </div> <!-- price-wrap .// -->
-                                </td>
-                                <td class="text-right">
-                                    <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                    <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <figure class="media">
-                                        <div class="img-wrap"><img src="{{ asset('user/images/items/3.jpg') }}" class="img-thumbnail img-sm"></div>
-                                        <figcaption class="media-body">
-                                            <h6 class="title text-truncate">Product name goes here </h6>
-                                            <dl class="dlist-inline small">
-                                                <dt>Size: </dt>
-                                                <dd>XXL</dd>
-                                            </dl>
-                                            <dl class="dlist-inline small">
-                                                <dt>Color: </dt>
-                                                <dd>Orange color</dd>
-                                            </dl>
-                                        </figcaption>
-                                    </figure>
-                                </td>
-                                <td>
-                                    <select class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <div class="price-wrap">
-                                        <var class="price">USD 45</var>
-                                        <small class="text-muted">(USD15 each)</small>
-                                    </div> <!-- price-wrap .// -->
-                                </td>
-                                <td class="text-right">
-                                    <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                    <a href="" class="btn btn-outline-danger btn-round"> × Remove</a>
-                                </td>
-                            </tr>
+                            @foreach(App\Model\Cart::totalCarts() as $cart)
+                                <tr>
+                                    <td>
+                                        <figure class="media">
+                                            <div class="img-wrap"><img src="{{ asset('user/images/items/1.jpg') }}" class="img-thumbnail img-sm"></div>
+                                            <figcaption class="media-body">
+                                                <h6 class="title text-truncate">{{ $cart->product->name }}</h6>
+                                                <dl class="dlist-inline small">
+                                                    <dt>Model: </dt>
+                                                    <dd>{{ $cart->product->model }}</dd>
+                                                </dl>
+                                                <dl class="dlist-inline small">
+                                                    <dt>Color: </dt>
+                                                    <dd>{{ $cart->product->color }}</dd>
+                                                </dl>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td>
+                                        <form class="" action="">
+                                            <input class="form-control" type="number" value="{{ $cart->product_quantity }}">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">USD {{ $cart->product->price }}</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">USD {{ $cart->product->price * $cart->product_quantity }}</var>
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td class="text-right">
+                                        <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
+                                        <a href="" class="btn btn-outline-danger"> × Remove</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div> <!-- card.// -->
@@ -144,15 +77,15 @@
                     <div class="box">		<h4> Billing Information</h4><hr>
                         <dl class="dlist-inline">
                             <dt>Name:</dt>
-                            <dd>Mamun </dd>
+                            <dd>Hafijur Rahman </dd>
                         </dl>
                         <dl class="dlist-inline">
                             <dt>Billing Address:</dt>
-                            <dd>Dagonbhuiyan, Feni</dd>
+                            <dd>Ashulia, Savar</dd>
                         </dl>
                         <dl class="dlist-inline">
                             <dt>Mobile: </dt>
-                            <dd>01777615690</dd>
+                            <dd>01875033293</dd>
                         </dl>
 
                     </div>

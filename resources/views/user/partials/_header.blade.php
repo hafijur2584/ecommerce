@@ -101,7 +101,7 @@
                                 <div class="icontext">
                                     <div class="icon-wrap"><i class="text-warning icon-sm fa fa-shopping-cart"></i></div>
                                     <div class="text-wrap text-dark">
-                                        Products <br> Cart
+                                        Products Cart<br> {{ App\Model\Cart::totalItem() }}
                                     </div>
                                 </div>
                             </a>

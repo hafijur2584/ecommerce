@@ -111,7 +111,7 @@
                                     <figcaption class="info-wrap">
                                         <a href="#" class="title">{{ $product->name }}</a>
                                         <div class="action-wrap">
-                                            <a href="#" class="btn btn-warning btn-sm float-right"> <i class="fa fa-shopping-cart"></i>  Add To Cart </a>
+                                            @include('user.partials._cart-button')
                                             <div class="price-wrap h5">
                                                 <span class="price-new">${{ $product->price }}</span>
                                                 {{--<del class="price-old">$1980</del>--}}
