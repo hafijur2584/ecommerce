@@ -16,12 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->nullable();
-            $table->string('ip_address')->nullable();
             $table->string('name');
             $table->string('phone_no');
             $table->text('shipping_address');
+            $table->string('payment');
             $table->string('email')->nullable();
-            $table->text('message')->nullable();
             $table->boolean('is_paid')->default(0);
             $table->boolean('is_completed')->default(0);
             $table->boolean('is_seen_by_admin')->default(0);

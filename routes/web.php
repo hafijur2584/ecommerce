@@ -11,6 +11,11 @@ Route::group(['prefix' => 'cart'],function (){
    Route::post('/delete/{id}','CartController@destroy')->name('cart.delete');
 });
 
+Route::group(['prefix' => 'checkout'],function (){
+    Route::get('/','OrderController@index')->name('checkout');
+    Route::post('/store','OrderController@store')->name('checkout.store');
+});
+
 
 //Route::get('/cart', function () {
 //    return view('user.cart');
