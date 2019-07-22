@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- ========================= SECTION MAIN ========================= -->
-    <section class="section-content bg padding-y-sm">
+    <section style="min-height: 600px;" class="section-content bg padding-y-sm">
         <div class="container">
             <nav class="mb-3">
                 <ol class="breadcrumb">
@@ -27,11 +27,14 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php
+                            $totalPrice = 0;
+                            @endphp
                             @foreach(App\Model\Cart::totalCarts() as $cart)
                                 <tr>
                                     <td>
                                         <figure class="media">
-                                            <div class="img-wrap"><img src="{{ asset('user/images/items/1.jpg') }}" class="img-thumbnail img-sm"></div>
+                                            <div class="img-wrap"><img src="{{ asset('user/images/items/4.jpg') }}" class="img-thumbnail img-sm"></div>
                                             <figcaption class="media-body">
                                                 <h6 class="title text-truncate">{{ $cart->product->name }}</h6>
                                                 <dl class="dlist-inline small">
@@ -62,9 +65,17 @@
                                     </td>
                                     <td class="text-right">
                                         <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-outline-success" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>
-                                        <a href="" class="btn btn-outline-danger"> × Remove</a>
+                                        <form style="display: inline;" action="{{ route('cart.delete',$cart->id) }}" method="post">
+                                            @csrf
+                                            <button class="btn btn-outline-danger float-right" type="submit"> × Remove</button>
+                                        </form>
+
+
                                     </td>
                                 </tr>
+                                @php
+                                $totalPrice += $cart->product->price * $cart->product_quantity;
+                                @endphp
                             @endforeach
 
                             </tbody>
@@ -74,53 +85,27 @@
                 </main> <!-- col.// -->
                 <aside class="col-sm-4">
 
-                    <div class="box">		<h4> Billing Information</h4><hr>
-                        <dl class="dlist-inline">
-                            <dt>Name:</dt>
-                            <dd>Hafijur Rahman </dd>
-                        </dl>
-                        <dl class="dlist-inline">
-                            <dt>Billing Address:</dt>
-                            <dd>Ashulia, Savar</dd>
-                        </dl>
-                        <dl class="dlist-inline">
-                            <dt>Mobile: </dt>
-                            <dd>01875033293</dd>
-                        </dl>
-
-                    </div>
                     <br>
                     <div class="alert alert-warning">
                         <dl class="dlist-align">
                             <dt>Total price: </dt>
-                            <dd class="text-right">BDT 568</dd>
+                            <dd class="text-right">$ {{ $totalPrice }}</dd>
                         </dl>
                         <dl class="dlist-align">
                             <dt>Shipping:</dt>
-                            <dd class="text-right">BDT 50</dd>
+                            <dd class="text-right">$ 10</dd>
                         </dl>
                         <dl class="dlist-align h4">
                             <dt>Total:</dt>
-                            <dd class="text-right"><strong>USD 1,650</strong></dd>
+                            <dd class="text-right"><strong>USD {{ $totalPrice + 10 }}</strong></dd>
                         </dl>
-
-                    </div>
-                    <div class="alert alert-info">
-                        <select class="form-control">
-                            <option>Payment Methood</option>
-                            <option>Cash On Delivery</option>
-                            <option>Bkash</option>
-                            <option>Roket</option>
-                        </select>
-                        <br>
-
-                        <input type="text" class="form-control" placeholder="Transaction No.">
 
                     </div>
 
                     <center>
 
                         <a href="" class="btn btn-success btn-block btn-lg"> Place your order</a>
+                        <a href="{{ route('shop') }}" class="btn btn-info btn-block btn-lg"> Continue Shopping</a>
                     </center>
                 </aside> <!-- col.// -->
             </div>
@@ -128,7 +113,6 @@
         </div> <!-- container .//  --><br><br>
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
-
 
 
 @endsection

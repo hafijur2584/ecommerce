@@ -8,27 +8,24 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
+
         $products = Product::take(8)->get();
         return view('home')->with('products',$products);
     }
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
 }

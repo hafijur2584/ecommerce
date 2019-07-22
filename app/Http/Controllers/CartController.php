@@ -12,21 +12,17 @@ class CartController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('user.cart');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -43,55 +39,24 @@ class CartController extends Controller
         [
             'product_id.required' => 'please give a product'
         ]);
-        $carts = Cart::where('user_id',Auth::id())->where('ip_address',request()->ip())->where('product_id',$request->product_id)->first();
+        $carts = Cart::where('user_id',Auth::id())->where('product_id',$request->product_id)->first();
         if (!is_null($carts)){
             $carts->increment('product_quantity');
-        }else{
+        }
+        else{
             $cart = new Cart();
-            if (Auth::check()){
-                $cart->user_id = Auth::id();
-            }
-            $cart->ip_address = request()->ip();
+            $cart->user_id = Auth::id();
             $cart->product_id = $request->product_id;
             $cart->save();
         }
 
 
-        return redirect()->back();
+        return redirect()->back()->with('success','Product added to cart successfully!');
 
-        session()->flash('success','product has added');
+
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
@@ -105,6 +70,14 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cart = Cart::find($id);
+        if (!is_null($cart)){
+            $cart->delete();
+        }else{
+            return redirect()->back();
+        }
+
+        return redirect()->route('cart')->with('success','Product remove from cart successfully!');
+
     }
 }

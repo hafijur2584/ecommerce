@@ -23,13 +23,13 @@
                             <aside class="col-sm-6 border-right">
                                 <article class="gallery-wrap">
                                     <div class="img-big-wrap">
-                                        <div> <a href="{{ asset('user/images/items/1.jpg') }}" data-fancybox=""><img src="{{ asset('user/images/items/1.jpg') }}"></a></div>
+                                        <div> <a href="{{ asset('user/images/items/4.jpg') }}" data-fancybox=""><img src="{{ asset('user/images/items/4.jpg') }}"></a></div>
                                     </div> <!-- slider-product.// -->
                                     <div class="img-small-wrap">
-                                        <div class="item-gallery"> <img src="{{ asset('user/images/items/1.jpg') }}"></div>
+                                        <div class="item-gallery"> <img src="{{ asset('user/images/items/4.jpg') }}"></div>
                                         <div class="item-gallery"> <img src="{{ asset('user/images/items/2.jpg') }}"></div>
                                         <div class="item-gallery"> <img src="{{ asset('user/images/items/3.jpg') }}"></div>
-                                        <div class="item-gallery"> <img src="{{ asset('user/images/items/4.jpg') }}"></div>
+                                        <div class="item-gallery"> <img src="{{ asset('user/images/items/1.jpg') }}"></div>
                                     </div> <!-- slider-nav.// -->
                                 </article> <!-- gallery-wrap .end// -->
                             </aside>
@@ -129,7 +129,7 @@
                             @foreach($products as $product)
                                 <div class="col-md-12 col-sm-3">
                                     <figure class="item border-bottom mb-3">
-                                        <a href="#" class="img-wrap"> <img src="{{ asset('user/images/items/4.jpg') }}" class="img-md"></a>
+                                        <a href="{{ route('shop.show',$product->name) }}" class="img-wrap"> <img src="{{ asset('user/images/items/4.jpg') }}" class="img-md"></a>
                                         <figcaption class="info-wrap">
                                             <a href="#" class="title">{{ $product->name }}</a>
                                             <div class="price-wrap mb-3">

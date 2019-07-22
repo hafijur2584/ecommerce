@@ -69,6 +69,7 @@
                     <div class="widgets-wrap float-right row no-gutters py-1">
                         <div class="col-auto">
                             <div class="widget-header dropdown">
+                                @guest
                                 <a href="#" data-toggle="dropdown" data-offset="20,10">
                                     <div class="icontext">
                                         <div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i></div>
@@ -79,29 +80,64 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu">
-                                    <form class="px-4 py-3">
+                                    <form class="px-4 py-3" action="{{ route('login') }}" method="post">
+                                        @csrf
                                         <div class="form-group">
                                             <label>Email address</label>
-                                            <input type="email" class="form-control" placeholder="email@example.com">
+                                            <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="email@example.com">
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="password" class="form-control" placeholder="Password">
+                                            <input id="password" type="password" name="password" class="form-control" placeholder="Password">
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                         <button type="submit" class="btn btn-primary">Sign in</button>
                                     </form>
+                                    @if(Route::has('register'))
                                     <hr class="dropdown-divider">
-                                    <a class="dropdown-item" href="sign-up.php">Have account? Sign up</a>
-                                    <a class="dropdown-item" href="#">Forgot password?</a>
+                                    <a class="dropdown-item" href="{{ route('register') }}">Have account? Sign up</a>
+                                    @endif
+                                    @if (Route::has('password.request'))
+                                    <a class="dropdown-item" href="{{ route('password.request') }}">Forgot password?</a>
+                                    @endif
                                 </div> <!--  dropdown-menu .// -->
+                                @else
+                                    <a href="#" data-toggle="dropdown" data-offset="20,10">
+                                        <div class="icontext">
+                                            <div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i></div>
+                                            <div class="text-wrap text-dark">
+                                                {{ Auth::user()->name }} <i class="fa fa-caret-down"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Logout</a>
+                                        <form style="display: inline;" id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div> <!--  dropdown-menu .// -->
+                                @endguest
                             </div>  <!-- widget-header .// -->
+
+
+
                         </div> <!-- col.// -->
                         <div class="col-auto">
-                            <a href="/cart" class="widget-header">
+                            <a href="@if(Auth::check()) {{ route('cart') }} @else {{ route('login') }}@endif" class="widget-header">
                                 <div class="icontext">
                                     <div class="icon-wrap"><i class="text-warning icon-sm fa fa-shopping-cart"></i></div>
                                     <div class="text-wrap text-dark">
-                                        Products Cart<br> {{ App\Model\Cart::totalItem() }}
+                                        Cart<br> {{ App\Model\Cart::totalItem() }}
                                     </div>
                                 </div>
                             </a>
@@ -123,5 +159,49 @@
         </div> <!-- container.// -->
     </section> <!-- header-main .// -->
 </header> <!-- section-header.// -->
-
 <!-- header end -->
+
+<!-- for login modal.// -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="px-4 py-3" action="{{ route('login') }}" method="post">
+                @csrf
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" value="{{ old('email') }}" name="email" class="form-control" placeholder="email@example.com">
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input id="password" type="password" name="password" class="form-control" placeholder="Password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Login</button>
+
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- for login modal end.// -->
+

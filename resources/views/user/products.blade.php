@@ -122,12 +122,12 @@
                                     <figure class="card card-product">
                                         <div class="img-wrap">
                                             <img src="{{ asset('user/images/items/4.jpg') }}">
-                                            <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> Quick view</a>
+                                            <a class="btn-overlay" href="{{ route('shop.show',$product->name) }}"><i class="fa fa-search-plus"></i> Quick view</a>
                                         </div>
                                         <figcaption class="info-wrap">
                                             <a href="#" class="title">{{ $product->name }}</a>
                                             <div class="action-wrap">
-                                                <a href="#" class="btn btn-warning btn-sm float-right"> <i class="fa fa-shopping-cart"></i>  Add To Cart </a>
+                                                @include('user.partials._cart-button')
                                                 <div class="price-wrap h5">
                                                     <span class="price-new">${{ $product->price }}</span>
                                                     {{--<del class="price-old">$1980</del>--}}
