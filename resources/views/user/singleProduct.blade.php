@@ -75,15 +75,21 @@
                                         <div class="label-rating">132 reviews</div>
                                     </div> <!-- rating-wrap.// -->
                                     <hr>
+                                    <form class="form-inline" action="{{ route('cart.store') }}" method="post">
+                                        @csrf
                                     <div class="row">
+
+                                            <input name="product_id" type="hidden" value="{{ $product->id }}">
                                         <div class="col-sm-5">
                                             <dl class="dlist-inline">
                                                 <dt>Quantity: </dt>
                                                 <dd>
-                                                    <select class="form-control form-control-sm" style="width:70px;">
-                                                        <option> 1 </option>
-                                                        <option> 2 </option>
-                                                        <option> 3 </option>
+                                                    <select name="product_quantity" class="form-control form-control-sm" style="width:70px;">
+                                                        <option value="1"> 1 </option>
+                                                        <option value="2"> 2 </option>
+                                                        <option value="3"> 3 </option>
+                                                        <option value="4"> 4 </option>
+                                                        <option value="5"> 5 </option>
                                                     </select>
                                                 </dd>
                                             </dl>  <!-- item-property .// -->
@@ -101,7 +107,8 @@
                                     </div> <!-- row.// -->
                                     <hr>
                                     <a href="#" class="btn  btn-danger"> <i class="fa fa-heart"></i> Favorite </a>
-                                    <a href="#" class="btn  btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart </a>
+                                    <button type="submit" class="btn  btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart </button>
+                                    </form>
                                     <!-- short-info-wrap .// -->
                                 </article> <!-- card-body.// -->
                             </aside> <!-- col.// -->

@@ -111,7 +111,7 @@
                                     @endif
                                 </div> <!--  dropdown-menu .// -->
                                 @else
-                                    <a href="#" data-toggle="dropdown" data-offset="20,10">
+                                    <a class="" href="#" data-toggle="dropdown" data-offset="20,10">
                                         <div class="icontext">
                                             <div class="icon-wrap"><i class="text-warning icon-sm fa fa-user"></i></div>
                                             <div class="text-wrap text-dark">
@@ -136,19 +136,17 @@
                             <a href="@if(Auth::check()) {{ route('cart') }} @else {{ route('login') }}@endif" class="widget-header">
                                 <div class="icontext">
                                     <div class="icon-wrap"><i class="text-warning icon-sm fa fa-shopping-cart"></i></div>
-                                    <div class="text-wrap text-dark">
+                                    <div class="text-wrap text-dark mt-1">
                                         Cart<br> {{ App\Model\Cart::totalItem() }}
                                     </div>
                                 </div>
                             </a>
                         </div> <!-- col.// -->
                         <div class="col-auto">
-                            <a href="#" class="widget-header">
+                            <a href="{{ route('invoice') }}" class="widget-header">
                                 <div class="icontext">
-                                    <div class="icon-wrap"><i class="text-warning icon-sm  fa fa-heart"></i></div>
                                     <div class="text-wrap text-dark">
-                                        <span class="small round badge badge-secondary">0</span>
-                                        <div>Favorites</div>
+                                        <div class="mt-1">Invoice</div>
                                     </div>
                                 </div>
                             </a>

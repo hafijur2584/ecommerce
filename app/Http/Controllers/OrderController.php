@@ -46,6 +46,8 @@ class OrderController extends Controller
         $order->name = $request->name;
         $order->email = $request->email;
         $order->phone_no = $request->phone_no;
+        $order->invoice_id = 'PS'.time();
+        $order->total_price = $request->total_price;
         $order->shipping_address = $request->shipping_address;
         $order->payment = $request->payment;
         $order->save();
@@ -54,6 +56,22 @@ class OrderController extends Controller
             $cart->save();
         }
         return redirect()->route('home')->with('success','Order successful. Admin review soon.');
+
+    }
+
+    public function invoice(){
+
+        $order = Order::where('user_id',Auth::user()->id)->orderBy('id','DESC')->first();
+        if (is_null($order)){
+            return view('user.invoice',compact('order'));
+        }else{
+            $products = Cart::where('user_id',Auth::user()->id)->where('order_id',$order->id)->get();
+
+            return view('user.invoice',compact('order','products'));
+        }
+
+
+
 
     }
 

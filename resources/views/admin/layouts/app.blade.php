@@ -28,3 +28,5 @@
 <!-- ./wrapper -->
 
 @include('admin.partials._script')
+@section('script')
+    @show
