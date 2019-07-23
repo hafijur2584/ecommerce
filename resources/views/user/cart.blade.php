@@ -31,7 +31,7 @@
                                 @php
                                     $totalPrice = 0;
                                 @endphp
-                                @foreach(App\Model\Cart::totalCarts() as $cart)
+                                @foreach($carts as $cart)
                                     <tr>
                                         <td>
                                             <figure class="media">

@@ -30,7 +30,7 @@
                             @php
                                 $totalPrice = 0;
                             @endphp
-                            @foreach(App\Model\Cart::totalCarts() as $cart)
+                            @foreach($carts as $cart)
                                 <tr>
                                     <td>
                                         <figure class="media">
@@ -108,12 +108,13 @@
                         <dl class="dlist-align h4">
                             <dt>Total:</dt>
                             <dd class="text-right"><strong>USD {{ $totalPrice + 10 }}</strong></dd>
+                            <input type="hidden" name="total_price" value="{{ $totalPrice + 10 }}">
                         </dl>
 
                     </div>
                     <div class="alert alert-info">
                         <select name="payment" class="form-control">
-                            <option>Payment Methood</option>
+                            <option value="">Payment Method</option>
                             <option value="CashOnDelivery">Cash On Delivery</option>
                         </select>
 

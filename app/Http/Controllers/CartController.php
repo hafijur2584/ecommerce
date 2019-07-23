@@ -20,7 +20,8 @@ class CartController extends Controller
     }
     public function index()
     {
-        return view('user.cart');
+        $carts = Cart::totalCarts();
+        return view('user.cart',compact('carts'));
     }
 
 
@@ -39,7 +40,7 @@ class CartController extends Controller
         [
             'product_id.required' => 'please give a product'
         ]);
-        $carts = Cart::where('user_id',Auth::id())->where('product_id',$request->product_id)->first();
+        $carts = Cart::where('user_id',Auth::id())->where('product_id',$request->product_id)->where('order_id',null)->first();
         if (!is_null($carts)){
             $carts->increment('product_quantity');
         }

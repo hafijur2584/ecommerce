@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Cart;
+use App\Model\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -17,7 +20,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('user.checkout');
+        $carts = Cart::totalCarts();
+        return view('user.checkout',compact('carts'));
     }
 
     /**
@@ -28,7 +32,29 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $this->validate($request,[
+           'name' => 'required',
+            'email' => 'required',
+            'phone_no' => 'required',
+            'shipping_address' => 'required',
+            'payment' => 'required',
+
+        ]);
+//        dd($request->all());
+        $order = new Order();
+        $order->user_id = Auth::user()->id;
+        $order->name = $request->name;
+        $order->email = $request->email;
+        $order->phone_no = $request->phone_no;
+        $order->shipping_address = $request->shipping_address;
+        $order->payment = $request->payment;
+        $order->save();
+        foreach (Cart::totalCarts() as $cart){
+            $cart->order_id = $order->id;
+            $cart->save();
+        }
+        return redirect()->route('home')->with('success','Order successful. Admin review soon.');
+
     }
 
 

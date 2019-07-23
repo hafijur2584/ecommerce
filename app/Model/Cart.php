@@ -42,10 +42,8 @@ class Cart extends Model
     public static function totalCarts(){
         if (Auth::check()){
             $carts = Cart::where('user_id',Auth::id())->where('order_id',null)->get();
+            return $carts;
         }
-        else{
-            $carts = Cart::where('ip_address',request()->ip())->where('order_id',null)->get();
-        }
-        return $carts;
+
     }
 }
