@@ -2,6 +2,7 @@
 
 
 Route::get('/', 'WellcomeController@index')->name('welcome');
+Route::get('/admin', 'WellcomeController@admin')->name('admin');
 Route::get('/shop', 'ShopController@index')->name('shop');
 Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 
