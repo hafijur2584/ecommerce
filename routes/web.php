@@ -2,7 +2,6 @@
 
 
 Route::get('/', 'WellcomeController@index')->name('welcome');
-Route::get('/admin', 'WellcomeController@admin')->name('admin');
 Route::get('/shop', 'ShopController@index')->name('shop');
 Route::get('/shop/{product}', 'ShopController@show')->name('shop.show');
 Route::get('/invoice', 'OrderController@invoice')->name('invoice');
@@ -19,8 +18,14 @@ Route::group(['prefix' => 'checkout'],function (){
 });
 
 Route::group(['prefix' => 'admin'],function (){
+    Route::get('/', 'Admin\AdminController@index')->name('admin.index');
+    Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\Admin\LoginController@login')->name('admin.login.submit');
+    Route::get('/logout','Auth\Admin\loginController@logout')->name('admin.logout');
     Route::get('/product/create','Admin\ProductController@create')->name('admin.product.create');
 });
+
+
 //Route::get('/cart', function () {
 //    return view('user.cart');
 //});

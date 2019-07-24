@@ -17,9 +17,6 @@ class WellcomeController extends Controller
         $products = Product::take(8)->get();
         return view('home')->with('products',$products);
     }
-    public function admin(){
-        return view('admin.dashboard');
-    }
 
 
 }
