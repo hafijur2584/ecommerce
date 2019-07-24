@@ -106,7 +106,7 @@
                                         </div> <!-- col.// -->
                                     </div> <!-- row.// -->
                                     <hr>
-                                    <a href="#" class="btn  btn-danger"> <i class="fa fa-heart"></i> Favorite </a>
+
                                     <button type="submit" class="btn  btn-primary"><i class="fa fa-shopping-cart"></i> Add to Cart </button>
                                     </form>
                                     <!-- short-info-wrap .// -->
