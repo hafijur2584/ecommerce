@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Cart;
+use App\Model\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +34,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        $product = Product::where('id',$request->product_id)->first()->stock;
 
         $this->validate($request,[
            'product_id' => 'required'

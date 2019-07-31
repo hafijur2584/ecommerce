@@ -40,7 +40,6 @@ class OrderController extends Controller
             'payment' => 'required',
 
         ]);
-//        dd($request->all());
         $order = new Order();
         $order->user_id = Auth::user()->id;
         $order->name = $request->name;
@@ -69,9 +68,6 @@ class OrderController extends Controller
 
             return view('user.invoice',compact('order','products'));
         }
-
-
-
 
     }
 
